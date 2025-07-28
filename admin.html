@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin Panel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body { font-family: Arial; padding: 1rem; }
+textarea { width: 100%; height: 300px; font-family: monospace; margin-bottom: 1rem; }
+button { padding: 0.5rem 1rem; }
+</style>
+</head>
+<body>
+<h1>Edit Detergents</h1>
+<p>Edit the JSON below to add/remove products.</p>
+<textarea id="editor"></textarea><br>
+<button onclick="saveData()">Save</button>
+<p id="status"></p>
+
+<script>
+const textarea = document.getElementById('editor');
+fetch('detergents.json')
+  .then(res => res.json())
+  .then(data => textarea.value = JSON.stringify(data, null, 2));
+
+function saveData() {
+  const json = textarea.value;
+  try {
+    const parsed = JSON.parse(json);
+    localStorage.setItem('detergents_override', json);
+    document.getElementById('status').textContent = 'Saved locally. Reload the app to see changes.';
+  } catch (e) {
+    document.getElementById('status').textContent = 'Invalid JSON';
+  }
+}
+</script>
+</body>
+</html>
