@@ -5,7 +5,7 @@ set -e
 
 # Define variables
 REPO_NAME="TritrationTest-BackEnd"
-USERNAME="grahamm"
+USERNAME="grahamm89"
 
 # Create the repo (public)
 gh repo create "$USERNAME/$REPO_NAME" --public --confirm
